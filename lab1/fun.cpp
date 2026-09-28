@@ -2,6 +2,8 @@
 #include <iostream>
 #include <algorithm>
 #include <random>
+#include <vector>
+#include <algorithm>
 
 CostMatrix CreateMatrix(int NumCity, char method) {
 	CostMatrix matrix(NumCity, std::vector<int>(NumCity, 0));
@@ -45,3 +47,63 @@ int cheсkValue() {
 
 }
 
+TspResult searchSolution(CostMatrix matrixPrice, int numCity, int startCity) {
+	std::vector<int> path(numCity,0);
+	std::vector<int> bestPath;
+
+	int j = 0, bestCost=11*numCity;
+
+	for (int i = 0; i < numCity; i++) {
+		if (i != startCity) {
+			path[j] = i; 
+			j++;
+		}
+	}
+	path[numCity - 1] = startCity;
+
+	do {
+		int currentCost = 0, currentCity = startCity;
+
+		for (int nextCity : path) {
+			currentCost += matrixPrice[currentCity][nextCity];
+			currentCity = nextCity;
+		}
+
+		if (bestCost > currentCost) {
+			bestCost = currentCost;
+			bestPath.clear();
+			bestPath.push_back(startCity);
+
+			for (int city : path) {
+				bestPath.push_back(city);
+			}
+
+		}
+
+	} while (std::next_permutation(path.begin(), path.end() - 1));
+
+	TspResult result;
+	result.path = bestPath;
+	result.totalCost = bestCost;
+
+	return result;
+
+}
+
+void printPath(const TspResult& result) {
+	if (result.path.empty()) {
+		std::cout << "\nRoute not found!\n";
+		return;
+	}
+
+	std::cout << "\nOptimal route: ";
+	for (size_t i = 0; i < result.path.size(); ++i) {
+		std::cout << result.path[i] + 1;
+
+		if (i + 1 < result.path.size()) {
+			std::cout << " -> ";
+		}
+	}
+
+	std::cout << "\nTotal minimum cost: " << result.totalCost << "\n\n";
+}

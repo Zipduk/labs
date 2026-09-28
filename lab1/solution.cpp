@@ -3,7 +3,7 @@
 #include "fun.h"
 
 int main() {
-	int numCity;
+	int numCity,startCity;
     char fillMethod = ' ';
     CostMatrix matrixCost;
 
@@ -21,6 +21,13 @@ int main() {
 
     matrixCost = CreateMatrix(numCity,fillMethod);
 
+    std::cout << "Enter start city: ";
+    startCity = cheсkValue();
+
+    TspResult result;
+    result = searchSolution(matrixCost, numCity, startCity-1);
+
+    printPath(result);
 
 	return 0;
 }

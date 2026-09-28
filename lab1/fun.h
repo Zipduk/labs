@@ -4,9 +4,10 @@ using CostMatrix = std::vector<std::vector<int>>;
 
 struct TspResult {
     std::vector<int> path;       
-    long long totalCost = 0;     
-    bool isFound = false;        
+    int totalCost = 0;        
 };
 
 CostMatrix CreateMatrix(int NumCity, char method);
 int cheсkValue();
+TspResult searchSolution(CostMatrix matrixPrice, int numCity, int startCity);
+void printPath(const TspResult& result);
