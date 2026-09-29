@@ -21,13 +21,24 @@ int main() {
 
     matrixCost = CreateMatrix(numCity,fillMethod);
 
+    printMatrix(matrixCost);
+
     std::cout << "Enter start city: ";
     startCity = cheсkValue();
 
+
     TspResult result;
+    
     result = searchSolution(matrixCost, numCity, startCity-1);
 
+    std::cout << "exact solution\n";
     printPath(result);
 
+    TspResult greedyResult;
+
+    greedyResult = greedySearchSolution(matrixCost, numCity, startCity - 1);
+
+    std::cout << "greedy solution\n";
+    printPath(greedyResult);
 	return 0;
 }

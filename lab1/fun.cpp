@@ -4,6 +4,7 @@
 #include <random>
 #include <vector>
 #include <algorithm>
+#include <iomanip>
 
 CostMatrix CreateMatrix(int NumCity, char method) {
 	CostMatrix matrix(NumCity, std::vector<int>(NumCity, 0));
@@ -106,4 +107,65 @@ void printPath(const TspResult& result) {
 	}
 
 	std::cout << "\nTotal minimum cost: " << result.totalCost << "\n\n";
+}
+
+void printMatrix(const CostMatrix& matrix) {
+	int size = static_cast<int>(matrix.size());
+
+	std::cout << "\n=== COST MATRIX ===\n\n";
+
+	std::cout << "      ";
+	for (int j = 0; j < size; ++j) {
+		std::cout << std::setw(4) << (j + 1);
+	}
+	std::cout << "\n";
+
+	std::cout << "     +" << std::string(size * 4, '-') << "\n";
+
+	for (int i = 0; i < size; ++i) {
+		std::cout << std::setw(4) << (i + 1) << " |";
+
+		for (int j = 0; j < size; ++j) {
+			std::cout << std::setw(4) << matrix[i][j];
+		}
+		std::cout << "\n";
+	}
+	std::cout << "\n";
+}
+
+TspResult greedySearchSolution(CostMatrix matrixPrice, int numCity, int startCity) {
+	std::vector<bool> visited(numCity, false);
+	std::vector<int> path;
+	int totalCost = 0;
+
+	int currentCity = startCity;
+
+	path.push_back(currentCity);
+	visited[currentCity] = true;
+
+	for (int step = 0; step < numCity - 1; step++) {
+		int nearestCity = -1;
+		int minCost = 11*numCity;
+
+		for (int nextCity = 0; nextCity < numCity; nextCity++) {
+			if (!visited[nextCity] && matrixPrice[currentCity][nextCity] < minCost) {
+				minCost = matrixPrice[currentCity][nextCity];
+				nearestCity = nextCity;
+			}
+		}
+
+		currentCity = nearestCity;
+		path.push_back(currentCity);
+		visited[currentCity] = true;
+		totalCost += minCost;
+	}
+
+	totalCost += matrixPrice[currentCity][startCity];
+	path.push_back(startCity);
+
+	TspResult result;
+	result.path = path;
+	result.totalCost = totalCost;
+
+	return result;
 }
