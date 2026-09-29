@@ -48,8 +48,36 @@ int cheсkValue() {
 
 }
 
+bool Dijkstra(std::vector<int>& path) {
+	int lenPath=path.size();
+	int i = lenPath - 2;
+
+	while (i >= 0 && path[i] >= path[i + 1]) {
+		i--;
+	}
+
+	if (i < 0) {
+		return false;
+	}
+
+	int j = lenPath - 1;
+	while (path[i] >= path[j]) {
+		j--;
+	}
+	std::swap(path[i], path[j]);
+
+	int left = i + 1;
+	int right = lenPath - 1;
+	while (left < right) {
+		std::swap(path[left], path[right]);
+		left++;
+		right--;
+	}
+	return true;
+}
+
 TspResult searchSolution(CostMatrix matrixPrice, int numCity, int startCity) {
-	std::vector<int> path(numCity,0);
+	std::vector<int> path(numCity-1,0);
 	std::vector<int> bestPath;
 
 	int j = 0, bestCost=11*numCity, worstCost=0;
@@ -60,7 +88,6 @@ TspResult searchSolution(CostMatrix matrixPrice, int numCity, int startCity) {
 			j++;
 		}
 	}
-	path[numCity - 1] = startCity;
 
 	do {
 		int currentCost = 0, currentCity = startCity;
@@ -69,6 +96,7 @@ TspResult searchSolution(CostMatrix matrixPrice, int numCity, int startCity) {
 			currentCost += matrixPrice[currentCity][nextCity];
 			currentCity = nextCity;
 		}
+		currentCost += matrixPrice[currentCity][startCity];
 
 		if (bestCost > currentCost) {
 			bestCost = currentCost;
@@ -78,6 +106,7 @@ TspResult searchSolution(CostMatrix matrixPrice, int numCity, int startCity) {
 			for (int city : path) {
 				bestPath.push_back(city);
 			}
+			bestPath.push_back(startCity);
 
 		if (currentCost > worstCost) {
 			worstCost = currentCost;
@@ -85,7 +114,7 @@ TspResult searchSolution(CostMatrix matrixPrice, int numCity, int startCity) {
 
 		}
 
-	} while (std::next_permutation(path.begin(), path.end() - 1));
+	} while (Dijkstra(path));
 
 	TspResult result;
 	result.path = bestPath;

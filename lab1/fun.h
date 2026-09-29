@@ -16,3 +16,4 @@ void printPath(const TspResult& result);
 void printMatrix(const CostMatrix& matrix);
 TspResult greedySearchSolution(CostMatrix matrixPrice, int numCity, int startCity);
 void runFullReport();
+bool Dijkstra(std::vector<int>& path);
