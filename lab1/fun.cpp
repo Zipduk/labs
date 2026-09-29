@@ -3,8 +3,8 @@
 #include <algorithm>
 #include <random>
 #include <vector>
-#include <algorithm>
 #include <iomanip>
+#include <chrono>
 
 CostMatrix CreateMatrix(int NumCity, char method) {
 	CostMatrix matrix(NumCity, std::vector<int>(NumCity, 0));
@@ -52,7 +52,7 @@ TspResult searchSolution(CostMatrix matrixPrice, int numCity, int startCity) {
 	std::vector<int> path(numCity,0);
 	std::vector<int> bestPath;
 
-	int j = 0, bestCost=11*numCity;
+	int j = 0, bestCost=11*numCity, worstCost=0;
 
 	for (int i = 0; i < numCity; i++) {
 		if (i != startCity) {
@@ -79,6 +79,10 @@ TspResult searchSolution(CostMatrix matrixPrice, int numCity, int startCity) {
 				bestPath.push_back(city);
 			}
 
+		if (currentCost > worstCost) {
+			worstCost = currentCost;
+			}
+
 		}
 
 	} while (std::next_permutation(path.begin(), path.end() - 1));
@@ -86,6 +90,7 @@ TspResult searchSolution(CostMatrix matrixPrice, int numCity, int startCity) {
 	TspResult result;
 	result.path = bestPath;
 	result.totalCost = bestCost;
+	result.worstCost = worstCost;
 
 	return result;
 
@@ -169,3 +174,64 @@ TspResult greedySearchSolution(CostMatrix matrixPrice, int numCity, int startCit
 
 	return result;
 }
+
+void runFullReport() {
+	// Набор размерностей матриц (по заданию: 4x4, 6x6, 8x8, 10x10)
+	std::vector<int> dimensions = { 4, 6, 8, 10 };
+	int runsPerDim = 3; // по 3 запуска на каждую размерность
+	int minPrice = 1;
+	int maxPrice = 100; // разброс цен от 1 до 100
+
+	std::cout << "\n================================= EXPERIMENTAL REPORT =================================\n";
+	std::cout << "Range of costs: [" << minPrice << " - " << maxPrice << "]\n\n";
+
+	std::cout << std::setw(6) << "Size"
+		<< std::setw(6) << "Run"
+		<< std::setw(12) << "Exact(Min)"
+		<< std::setw(12) << "Exact(Max)"
+		<< std::setw(14) << "Exact Time"
+		<< std::setw(14) << "Greedy Cost"
+		<< std::setw(15) << "Greedy Time"
+		<< std::setw(12) << "Quality\n";
+	std::cout << std::string(91, '-') << "\n";
+
+	for (int n : dimensions) {
+		for (int run = 1; run <= runsPerDim; ++run) {
+			// 1. Создаем случайную матрицу
+			CostMatrix matrix = CreateMatrix(n, 'r');
+			int startCity = 0;
+
+			// 2. Замеряем время точного алгоритма
+			auto startExact = std::chrono::high_resolution_clock::now();
+			TspResult exactRes = searchSolution(matrix, n, startCity);
+			auto endExact = std::chrono::high_resolution_clock::now();
+			std::chrono::duration<double, std::milli> exactDuration = endExact - startExact;
+
+			// 3. Замеряем время жадного алгоритма
+			auto startGreedy = std::chrono::high_resolution_clock::now();
+			TspResult greedyRes = greedySearchSolution(matrix, n, startCity);
+			auto endGreedy = std::chrono::high_resolution_clock::now();
+			std::chrono::duration<double, std::milli> greedyDuration = endGreedy - startGreedy;
+
+			// 4. Считаем процент качества
+			double quality = 100.0;
+			if (exactRes.worstCost != exactRes.totalCost) {
+				quality = (double)(exactRes.worstCost - greedyRes.totalCost) /
+					(exactRes.worstCost - exactRes.totalCost) * 100.0;
+			}
+			if (quality < 0.0) quality = 0.0; // защита от выбросов
+
+			// 5. Выводим строку отчета
+			std::cout << std::setw(4) << n << "x" << n
+				<< std::setw(6) << run
+				<< std::setw(12) << exactRes.totalCost
+				<< std::setw(12) << exactRes.worstCost
+				<< std::setw(11) << std::fixed << std::setprecision(4) << exactDuration.count() << " ms"
+				<< std::setw(14) << greedyRes.totalCost
+				<< std::setw(12) << std::fixed << std::setprecision(4) << greedyDuration.count() << " ms"
+				<< std::setw(11) << std::fixed << std::setprecision(1) << quality << "%\n";
+		}
+		std::cout << std::string(91, '-') << "\n";
+	}
+}
+

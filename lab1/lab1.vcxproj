@@ -145,6 +145,9 @@
   <ItemGroup>
     <ClInclude Include="fun.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\..\OneDrive\Рабочий стол\report.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

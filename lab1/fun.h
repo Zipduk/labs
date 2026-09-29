@@ -5,7 +5,8 @@ using CostMatrix = std::vector<std::vector<int>>;
 
 struct TspResult {
     std::vector<int> path;       
-    int totalCost = 0;        
+    int totalCost = 0; 
+    int worstCost = 0;
 };
 
 CostMatrix CreateMatrix(int NumCity, char method);
@@ -14,3 +15,4 @@ TspResult searchSolution(CostMatrix matrixPrice, int numCity, int startCity);
 void printPath(const TspResult& result);
 void printMatrix(const CostMatrix& matrix);
 TspResult greedySearchSolution(CostMatrix matrixPrice, int numCity, int startCity);
+void runFullReport();
