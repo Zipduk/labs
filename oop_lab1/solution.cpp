@@ -3,17 +3,15 @@
 #include "Angle.h"
 
 int main() {
-    std::cout << std::boolalpha;
-
-    Angle a(45, 30);
-    Angle b(45, 30); 
-    Angle c(60, 0); 
-
-    std::cout << "a == b: " << (a == b) << " (expected: true)\n";
-    std::cout << "a != c: " << (a != c) << " (expected: true)\n";
-    std::cout << "a < c:  " << (a < c) << " (expected: true)\n";
-    std::cout << "c > a:  " << (c > a) << " (expected: true)\n";
-    std::cout << "a >= b: " << (a >= b) << " (expected: true)\n";
+    Angle a(350, 0);
+    std::cout << "Initial angle a: " << a.getDegrees() << " deg " << a.getMinutes() << " min\n";
+    a += Angle(20, 0); 
+    std::cout << "After a += 20 deg: " << a.getDegrees() << " deg " << a.getMinutes() << " min (expected: 10 deg)\n";
+    a -= Angle(30, 0);
+    std::cout << "After a -= 30 deg: " << a.getDegrees() << " deg " << a.getMinutes() << " min (expected: 340 deg)\n";
+    Angle b(10, 45);
+    b += Angle(0, 30); 
+    std::cout << "After b += 30 min: " << b.getDegrees() << " deg " << b.getMinutes() << " min (expected: 11 deg 15 min)\n";
 
     return 0;
 }

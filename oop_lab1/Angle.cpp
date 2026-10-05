@@ -34,13 +34,30 @@ bool Angle::operator>=(const Angle& other) const {
 	return !(*this < other);
 }
 
+Angle& Angle::operator+=(const Angle& other) {
+	degrees_ += other.degrees_;
+	minutes_ += other.minutes_;
+	normalize();
+
+	return *this;
+}
+
+Angle& Angle::operator-=(const Angle& other) {
+	degrees_ -= other.degrees_;
+	minutes_ -= other.minutes_;
+	normalize();
+
+	return *this;
+}
+
 void Angle::normalize() {
-
 	int totalMinutes = degrees_ * MINUTES_PER_DEGREE + minutes_;
-	degrees_ = static_cast<int>(totalMinutes / MINUTES_PER_DEGREE);
-	minutes_ = static_cast<int>(totalMinutes % MINUTES_PER_DEGREE);
 
-	}
+	totalMinutes = (totalMinutes % MINUTES_PER_CIRCLE + MINUTES_PER_CIRCLE) % MINUTES_PER_CIRCLE;
+
+	degrees_ = totalMinutes / MINUTES_PER_DEGREE;
+	minutes_ = totalMinutes % MINUTES_PER_DEGREE;
+}
 
 Angle::Angle(int degrees, int minutes) : degrees_(degrees), minutes_(minutes) {
 	normalize();

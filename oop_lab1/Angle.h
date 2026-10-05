@@ -25,6 +25,9 @@ public:
     bool operator<=(const Angle& other) const;
     bool operator>=(const Angle& other) const;
 
+    Angle& operator+=(const Angle& other);
+    Angle& operator-=(const Angle& other);
+
     void setDegrees(int degres);
     void setMinutes(int minutes);
 };
