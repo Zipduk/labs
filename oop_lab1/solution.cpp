@@ -12,6 +12,9 @@ int main() {
     Angle b(10, 45);
     b += Angle(0, 30); 
     std::cout << "After b += 30 min: " << b.getDegrees() << " deg " << b.getMinutes() << " min (expected: 11 deg 15 min)\n";
+    Angle c(0, 0);
+    c = b  / 2;
+    std::cout << "c=" << c.getDegrees()<< "deg "<< c.getMinutes() << "min" ;
 
     return 0;
 }

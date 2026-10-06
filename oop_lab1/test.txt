@@ -1,0 +1,46 @@
+=======================================================
+         TESTING ALL METHODS OF THE ANGLE CLASS
+=======================================================
+
+--- 1. CONSTRUCTORS & NORMALIZATION ---
+Default constructor:       0 deg 0 min | Expected: 0 deg 0 min
+Parametric constructor:    45 deg 30 min | Expected: 45 deg 30 min
+Overflow (370 deg 75 min): 11 deg 15 min | Expected: 11 deg 15 min
+Negative (-20 deg -30 min):339 deg 30 min | Expected: 339 deg 30 min
+
+--- 3. ACCESSORS (GETTERS & SETTERS) ---
+Initial: getDegrees() = 10, getMinutes() = 20
+After setDegrees(50) and setMinutes(90):
+Result:   51 deg 30 min | Expected: 51 deg 30 min
+
+--- 4, 5, 6. RADIANS, SIN, COS ---
+Angle 30 deg in radians: 0.52360 rad | Expected: ~0.52360 rad
+sin(30 deg): 0.50000 | Expected: 0.50000
+cos(30 deg): 0.86603 | Expected: 0.86603
+sin(90 deg): 1.00000 | Expected: 1.00000
+cos(90 deg): 0.00000 | Expected: ~0.00000
+
+--- 7, 8. COMPARISON OPERATORS ---
+alpha: 45 deg 30 min, beta: 45 deg 30 min, gamma: 60 deg 0 min
+alpha == beta : true | Expected: true
+alpha != gamma: true | Expected: true
+alpha < gamma : true | Expected: true
+gamma > alpha : true | Expected: true
+alpha <= beta : true | Expected: true
+alpha >= gamma: false | Expected: false
+
+--- 9, 10. COMPOUND ASSIGNMENT (+= and -=) ---
+Start angle: 350 deg 0 min
+After += (20 deg 30 min): 10 deg 30 min | Expected: 10 deg 30 min
+After -= (30 deg 0 min):  340 deg 30 min | Expected: 340 deg 30 min
+
+--- 12. ADDITION (+) ---
+50 deg 40 min + 30 deg 35 min = 81 deg 15 min | Expected: 81 deg 15 min
+
+--- 11. MULTIPLICATION BY A NUMBER (*) ---
+20 deg 15 min * 3 = 60 deg 45 min | Expected: 60 deg 45 min
+20 deg 15 min * 0.5 = 10 deg 8 min | Expected: ~10 deg 7 min ╨╕╨╗╨╕ 10 deg 8 min
+
+--- DIVISION BY A NUMBER (/) ---
+90 deg 30 min / 2 = 45 deg 15 min | Expected: 45 deg 15 min
+90 deg 30 min / 3 = 30 deg 10 min | Expected: 30 deg 10 min

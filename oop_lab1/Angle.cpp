@@ -42,6 +42,25 @@ Angle& Angle::operator+=(const Angle& other) {
 	return *this;
 }
 
+Angle Angle::operator+(const Angle& other) {
+	Angle result = *this; 
+	result += other;
+	normalize();
+	return result;        
+}
+
+Angle Angle::operator/(double number) const {
+	int newTotalMinutes = std::round(toTotalMinutes() / number);
+
+	return Angle(0, static_cast<int>(newTotalMinutes));
+}
+
+Angle Angle::operator*(double number) const {
+	int newTotalMinutes = std::round(toTotalMinutes() * number);
+
+	return Angle(0, static_cast<int>(newTotalMinutes));
+}
+
 Angle& Angle::operator-=(const Angle& other) {
 	degrees_ -= other.degrees_;
 	minutes_ -= other.minutes_;

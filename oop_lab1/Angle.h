@@ -27,6 +27,9 @@ public:
 
     Angle& operator+=(const Angle& other);
     Angle& operator-=(const Angle& other);
+    Angle operator+(const Angle& other);
+    Angle operator*(double number) const;
+    Angle operator/(double number) const;
 
     void setDegrees(int degres);
     void setMinutes(int minutes);
