@@ -3,7 +3,7 @@
 #include "Angle.h"
 
 int main() {
-    Angle a = Angle::createAngle();
+    Angle a = Angle::createAngle(), b(20, 12);
 
     a.printAngle();
 
