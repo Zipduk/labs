@@ -73,7 +73,7 @@ Angle& Angle::operator-=(const Angle& other) {
 void Angle::normalize() {
 	int totalMinutes = degrees_ * MINUTES_PER_DEGREE + minutes_;
 
-	totalMinutes = (totalMinutes % MINUTES_PER_CIRCLE + MINUTES_PER_CIRCLE) % MINUTES_PER_CIRCLE;
+	totalMinutes = totalMinutes % MINUTES_PER_CIRCLE;
 
 	degrees_ = totalMinutes / MINUTES_PER_DEGREE;
 	minutes_ = totalMinutes % MINUTES_PER_DEGREE;

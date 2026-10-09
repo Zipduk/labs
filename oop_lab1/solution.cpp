@@ -32,7 +32,7 @@ int main() {
     c.printAngle();
 
     std::cout << "\nc/2= ";
-    c = c / 2;
+    c = c/ 2;
     c.printAngle();
 
     return 0;
