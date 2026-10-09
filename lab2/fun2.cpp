@@ -11,6 +11,9 @@ std::vector<int> Byera(std::string& sentence, std::string& find, std::vector<int
 		table[find[i]] = lengthFind - 1 - i;
 	}
 
+	if (range[1] > sentence.length()) range[1] = sentence.length();
+	if (range[0] < 0) range[0] = 0;
+
 	int i = range[0] + lengthFind-1;
 	for (; i <= range[1];) {
 

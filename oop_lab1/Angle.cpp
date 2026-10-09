@@ -1,4 +1,5 @@
 #include <iostream>
+
 #include "Angle.h"
 #include <cmath>
 
@@ -88,11 +89,11 @@ double Angle::toRadians() const {
 	return totalDegrees * (PI/180.0);
 }
 
-double Angle::getCos() const{
+float Angle::getCos() const{
 	return std::cos(toRadians());
 }
 
-double Angle::getSin() const {
+float Angle::getSin() const {
 	return std::sin(toRadians());
 }
 

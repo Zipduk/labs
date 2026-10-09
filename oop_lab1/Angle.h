@@ -17,8 +17,8 @@ public:
     int toTotalMinutes() const;
 
     double toRadians() const;
-    double getSin() const;
-    double getCos() const;
+    float getSin() const;
+    float getCos() const;
 
     bool operator==(const Angle& other) const;
     bool operator!=(const Angle& other) const;
