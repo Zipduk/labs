@@ -16,18 +16,20 @@ int main() {
 	std::cout << "enter where start and  end search: ";
 	std::cin >> rangeFind[0] >> rangeFind[1]; 
 
-	std::vector<int> findRange = Byera(sentence, findWord, rangeFind);
+	std::cout << "find on pos: " << ByeraSingle(sentence, findWord, rangeFind);
 
-	std::cout << "\nFound indices: ";
-	if (findRange.empty()) {
-		std::cout << "None (not found)";
-	}
-	else {
-		for (int index : findRange) {
-			std::cout << index << " ";
-		}
-	}
-	std::cout << "\n";
+	//std::vector<int> findRange = Byera(sentence, findWord, rangeFind);
+
+	//std::cout << "\nFound indices: ";
+	//if (findRange.empty()) {
+	//	std::cout << "None (not found)";
+	//}
+	//else {
+	//	for (int index : findRange) {
+	//		std::cout << index << " ";
+	//	}
+	//}
+	//std::cout << "\n";
 
 
 	return 0;

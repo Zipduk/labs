@@ -10,7 +10,7 @@ private:
 public:
 
     Angle(int degrees = 0, int minutes = 0 );
-    Angle(float tg, int minutes);
+    Angle(double tg);
     
     int getDegrees() const;
     int getMinutes() const;
