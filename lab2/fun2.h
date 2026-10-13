@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
 
-std::vector<int> Byera(std::string& sentence, std::string& find, std::vector<int>& range);
+std::vector<int> Byera(const std::string& sentence, const std::string& find, int start, int end);
 
-int ByeraSingle(std::string& sentence, std::string& find, std::vector<int>& range);
+int ByeraSingle(const std::string& sentence, const std::string& find);

@@ -5,7 +5,7 @@
 
 int main() {
 	std::string sentence, findWord;
-	std::vector<int> rangeFind(2, 0);
+	int start,end;
 
 	std::cout << "enter sentence: ";
 	std::getline(std::cin, sentence);
@@ -13,10 +13,10 @@ int main() {
 	std::cout << "enter finding word: ";
 	std::getline(std::cin, findWord);
 
-	std::cout << "enter where start and  end search: ";
-	std::cin >> rangeFind[0] >> rangeFind[1]; 
+	//std::cout << "enter where start and  end search: ";
+	//std::cin >> start >> end; 
 
-	std::cout << "find on pos: " << ByeraSingle(sentence, findWord, rangeFind);
+	std::cout << "find on pos: " << ByeraSingle(sentence, findWord);
 
 	//std::vector<int> findRange = Byera(sentence, findWord, rangeFind);
 

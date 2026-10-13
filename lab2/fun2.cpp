@@ -3,7 +3,7 @@
 #include <algorithm>
 #include "fun2.h"
 
-std::vector<int> Byera(std::string& sentence, std::string& find, std::vector<int>& range) {
+std::vector<int> Byera(const std::string& sentence , const std::string& find ,  int start , int end ) {
 	int lengthFind = find.length();
 	std::vector<int> table(256, lengthFind), findsId;
 
@@ -11,11 +11,11 @@ std::vector<int> Byera(std::string& sentence, std::string& find, std::vector<int
 		table[find[i]] = lengthFind - 1 - i;
 	}
 
-	if (range[1] > sentence.length()) range[1] = sentence.length();
-	if (range[0] < 0) range[0] = 0;
+	if (end > sentence.length()) end = sentence.length();
+	if (start < 0) start = 0;
 
-	int i = range[0] + lengthFind-1;
-	for (; i <= range[1];) {
+	int i = start + lengthFind-1;
+	for (; i <= end;) {
 
 		if (sentence[i] == find[lengthFind-1]) {
 			int j = lengthFind - 1;
@@ -35,19 +35,18 @@ std::vector<int> Byera(std::string& sentence, std::string& find, std::vector<int
 	return findsId;
 }
 
-int ByeraSingle(std::string& sentence, std::string& find, std::vector<int>& range) {
+int ByeraSingle(const std::string& sentence, const std::string& find) {
 	int lengthFind = find.length();
+	int sentenceLength = sentence.length();
 	std::vector<int> table(256, lengthFind);
 
 	for (int i = 0;i < lengthFind - 1; i++) {
 		table[find[i]] = lengthFind - 1 - i;
 	}
 
-	if (range[1] > sentence.length()) range[1] = sentence.length();
-	if (range[0] < 0) range[0] = 0;
-
-	int i = range[0] + lengthFind - 1;
-	for (; i <= range[1];) {
+	
+	int i = lengthFind - 1;
+	for (; i < sentenceLength;) {
 
 		if (sentence[i] == find[lengthFind - 1]) {
 			int j = lengthFind - 1;
