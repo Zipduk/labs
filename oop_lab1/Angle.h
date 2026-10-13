@@ -9,9 +9,7 @@ private:
 public:
 
     Angle(int degrees = 0, int minutes = 0);
-    static Angle createAngle();
-
-
+    
     int getDegrees() const;
     int getMinutes() const;
     int toTotalMinutes() const;
@@ -34,6 +32,7 @@ public:
     Angle operator/(double number) const;
 
     void printAngle() const;
+    void createAngle();
     void setDegrees(int degres);
     void setMinutes(int minutes);
     

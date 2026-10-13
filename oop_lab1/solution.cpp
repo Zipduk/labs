@@ -4,7 +4,9 @@
 #include <iomanip>
 
 int main() {
-    Angle b(90, 0), a(120,30),c;
+    Angle b(90, 0),a, c;
+
+    a.createAngle();
 
     std::cout << "angle b: ";
     b.printAngle();

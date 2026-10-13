@@ -115,14 +115,11 @@ void Angle::setMinutes(int minutes) {
 	normalize();
 }
 
-Angle Angle::createAngle() {
-	int degrees, minutes;
+void Angle::createAngle(){
 	std::cout << "enter degrees angle: ";
-	std::cin >> degrees;
+	std::cin >> degrees_;
 	std::cout << "enter minutess angle: ";
-	std::cin >> minutes;
-
-	return Angle(degrees, minutes);
+	std::cin >> minutes_;
 }
 
 void Angle::printAngle() const{
