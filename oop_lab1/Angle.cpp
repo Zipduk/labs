@@ -120,6 +120,7 @@ void Angle::createAngle(){
 	std::cin >> degrees_;
 	std::cout << "enter minutess angle: ";
 	std::cin >> minutes_;
+	normalize();
 }
 
 void Angle::printAngle() const{

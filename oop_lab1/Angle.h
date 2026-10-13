@@ -3,12 +3,14 @@ class Angle {
 private:
     int degrees_;
     int minutes_;
+    float tg;
 
     void normalize();
 
 public:
 
-    Angle(int degrees = 0, int minutes = 0);
+    Angle(int degrees = 0, int minutes = 0 );
+    Angle(float tg, int minutes);
     
     int getDegrees() const;
     int getMinutes() const;

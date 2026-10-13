@@ -4,7 +4,7 @@
 #include <iomanip>
 
 int main() {
-    Angle b(90, 0),a, c;
+    Angle b(90, 0),a, c(1.0);
 
     a.createAngle();
 
