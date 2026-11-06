@@ -28,32 +28,14 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="data\arr_10000_10.txt">
-      <Filter>Исходные файлы</Filter>
-    </Text>
-    <Text Include="data\arr_10000_1000.txt">
-      <Filter>Исходные файлы</Filter>
-    </Text>
-    <Text Include="data\arr_10000_100000.txt">
-      <Filter>Исходные файлы</Filter>
-    </Text>
-    <Text Include="data\arr_100000_10.txt">
-      <Filter>Исходные файлы</Filter>
-    </Text>
-    <Text Include="data\arr_100000_1000.txt">
-      <Filter>Исходные файлы</Filter>
-    </Text>
-    <Text Include="data\arr_100000_100000.txt">
-      <Filter>Исходные файлы</Filter>
-    </Text>
-    <Text Include="data\arr_1000000_10.txt">
-      <Filter>Исходные файлы</Filter>
-    </Text>
-    <Text Include="data\arr_1000000_1000.txt">
-      <Filter>Исходные файлы</Filter>
-    </Text>
-    <Text Include="data\arr_1000000_100000.txt">
-      <Filter>Исходные файлы</Filter>
-    </Text>
+    <Text Include="data\arr_1000000_100000.txt" />
+    <Text Include="data\arr_10000_1000.txt" />
+    <Text Include="data\arr_10000_100000.txt" />
+    <Text Include="data\arr_100000_10.txt" />
+    <Text Include="data\arr_100000_1000.txt" />
+    <Text Include="data\arr_100000_100000.txt" />
+    <Text Include="data\arr_1000000_10.txt" />
+    <Text Include="data\arr_1000000_1000.txt" />
+    <Text Include="data\arr_10000_10.txt" />
   </ItemGroup>
 </Project>
